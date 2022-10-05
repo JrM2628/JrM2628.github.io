@@ -1,0 +1,66 @@
+navbar_entries:
+  - title: about
+    url: about
+
+  - title: blog
+    url: blog
+
+  - title: website
+    url: https://blog.apt41.cloud/
+
+project_entries:
+  - title: httpworker
+    url: https://github.com/JrM2628/httpworker
+    desc: A Flask-based HTTP(S) command and control (C2) framework with a web interface. Custom Windows EXE/DLL/reflective DLL implants written in C++.
+
+  - title: dumptruck
+    url: https://github.com/JrM2628/dumptruck
+    desc: A C++ Chromium credential and cookie stealer. Does not exfiltrate data.
+
+  - title: TBD
+    url: https://github.com/JrM2628
+    desc: Placeholder
+
+footer_entries:
+  - title: twitter
+    url: https://twitter.com/JrM2628
+
+  - title: github
+    url: https://github.com/JrM2628
+
+  - title: feed
+    url: feed.xml
+
+misc_entries:
+  - title: this is an example vertical list
+    url: false
+
+  - title: you can show or hide using a boolean flag in _config.yml
+    url: false
+
+  - title: and you can add data in _data/home.yml
+    url: false
+
+  - title: Blog posts
+    post_list: true
+    url: false
+
+  - title: moonwalk on the Internet
+    url: false
+    entries:
+      - title: on Github
+        url: https://github.com/abhinavs/moonwalk
+
+      - title: originally built for abhinav's homepage
+        url: https://www.abhinav.co
+
+      - title: this list is scalable and can be nested
+        url: false
+        entries:
+          - title: this is nested inside a nested list
+            url: false
+
+          - title: it is easy to use, see _data/home.yml to see how to configure it.
+            url: false
+
+
