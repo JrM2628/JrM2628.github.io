@@ -21,8 +21,8 @@
 title: Jake's Cool and Interesting Site :)
 email: thisemaildoesnotexist@apt41.cloud
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi, I'm Jake! I am interested in all things security but most of all I enjoy threat intelligence, offensive security and tool development, and DFIR.
-  This site serves as a platform to document projects and goals I've been working towards and to share my knowledge and experiences.  
+  Security blog. Topics may include threat intelligence, offensive security, programming/automation, and beyond. Anything goes. 
+
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: JrM2628
