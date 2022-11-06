@@ -7,11 +7,11 @@ Hi, I'm Jake! I am interested in all things security but most of all I enjoy thr
 ### Talks
 #### Reflective DLL Injection
 
-<iframe width="1519" height="553" src="https://www.youtube.com/embed/jg0CmrwEcNs" title="Reflective DLL Injection - Jake McLellan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="300" height="200" src="https://www.youtube.com/embed/jg0CmrwEcNs" title="Reflective DLL Injection - Jake McLellan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 #### Introduction to YARA
 
-<iframe width="1519" height="553" src="https://www.youtube.com/embed/RuXCpubd8AI" title="Intro to Yara   Jake M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="300" height="200" src="https://www.youtube.com/embed/RuXCpubd8AI" title="Intro to Yara   Jake M" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ### Writing Samples
