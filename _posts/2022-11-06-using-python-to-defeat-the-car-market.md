@@ -7,21 +7,21 @@ Purchasing a vehicle has become a daunting, time-consuming task since the height
 
 Despite it being an awful time to purchase a vehicle, it has become inevitable for many Americans - myself included. Early this year, I embarked on a journey to purchase a new vehicle out of necessity. Since it is a large, important purchase that I plan to keep for a long time, I was looking for something fun, practical, reasonably priced, and something that I wouldn’t outgrow anytime soon. The resulting decision led me to the Hyundai Elantra N.   
 
-![](/assets/20221106-image1.jpg)
+![](/assets/hyundai/20221106-image1.jpg)
 
 ## The Fun Begins
 
 Upon visiting the Hyundai USA website, I went to the “[Inventory](https://www.hyundaiusa.com/us/en/inventory-search)” section to see what my options were. However, the website only gives a maximum search radius of 250 miles. Unfortunately, in today’s market, consumers may need to travel in excess of that in order to find a vehicle without unnecessary markups. In order to efficiently discover inventory outside of that search radius, I needed to figure out how the site was getting the information it displays to the user.  
 
-![](/assets/20221106-image2.png)
+![](/assets/hyundai/20221106-image2.png)
 
 This is when I first began to examine the web application in greater detail. Given that the search radius was a user-defined variable, I wondered if it is possible to alter its value to exceed the maximum allowed by Hyundai. Using the browser’s built-in developer tools to examine network traffic, I filtered the traffic using one of the likely parameters of 250 and noticed an HTTP GET request to “vehicleList.json” which includes our expected parameters. The response includes a JSON object containing dealerships, and those dealerships contain vehicles. This is how the web application fetches all of the available inventory within the search radius.
 
-![](/assets/20221106-image5.png)
+![](/assets/hyundai/20221106-image5.png)
 
 The “vehicleList.json” API appears to take 4 parameters: the user’s postal code, the year/model name of the vehicle, and the search radius. If we want to build a tool that can help us track Elantra N inventory nationwide, we must see if we can modify the search radius value successfully. If they are validating the user input on the server side before processing the request, the API call would be denied and we would be forced to find another solution.
 
-![](/assets/20221106-image3.png)
+![](/assets/hyundai/20221106-image3.png)
 
 When we try to directly visit the API, we are met with an HTTP 403 Error indicating access denied. Comparing the request made from the Inventory Search page versus the request made from directly visiting the API, the only major difference I noted between the two is the lack of the “referer” header in the direct visit. This indicates that Hyundai’s API likely uses  this header as a means to detect and prevent unintelligent scraping. I went ahead and implemented this basic request programmatically using the Python Requests library and it worked. The same data that I saw through visiting the website was now saved as a variable that I could control in my Python code. Oh, and I confirmed that adding extra zeros to the end of the radius works. I now had the ability to query the inventory for the entire United States with one HTTP request.   
 
@@ -49,4 +49,4 @@ I was also able to determine that about 74% of sampled US-bound Elantra N vehicl
 ## Beating the Odds
 Purchasing a new car in these market conditions and in a rare configuration (Performance Blue paint, manual transmission) would be no easy task. However, armed with up-to-date information of the market and some handy alerting which I implemented, I was able to defy the odds and find the exact configuration I wanted just a few months after US deliveries had begun. And I’ve been loving it ever since. 
 
-![](/assets/20221106-image6.jpg)
+![](/assets/hyundai/20221106-image6.jpg)
