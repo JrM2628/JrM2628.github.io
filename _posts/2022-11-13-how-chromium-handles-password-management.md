@@ -8,7 +8,7 @@ According to [StatCounter](https://gs.statcounter.com/browser-market-share), Chr
 By the end of this, the reader should be equipped with the knowlege of how Chromium-based browsers handle the storage of credentials (and cookies, since they're stored the same way!). Once a baseline understanding of credential management has been established, the credential decryption process can be replicated to build a standalone credential stealer. This will be discussed in Part 2 in the form of [dumptruck](https://github.com/JrM2628/dumptruck), an open-source proof of concept C++ credential/cookie stealer.  
  
 
- ## Prerequisites
+## Prerequisites
 The following information will be useful in understanding how to obtain credentials from the login database:  
  
  1. Ability to read and understand C++ code
@@ -32,13 +32,13 @@ These files are used by Chrome when storing credentials and cookies. Other Chrom
 Each of the three notable files is found in the [User Data directory](https://chromium.googlesource.com/chromium/src/+/master/docs/user_data_dir.md) which is computed in the function [GetDefaultUserDataDirectory](https://source.chromium.org/chromium/chromium/src/+/main:chrome/common/chrome_paths_internal.h?q=GetDefaultUserDataDirectory&ss=chromium). Chromium profiles allow users to separate stored information and settings on the same browser installation and are represented as a different subdirectory within the User Data directory. Most users opt to exclusively use the "Default" profile.
 
 
- ## Chromium Analysis - Decrypting a Single Password
+## Chromium Analysis - Decrypting a Single Password
 
 
- ### Secret Decryption
+### Secret Decryption
 
 
-```C++
+```c++
 // components/password_manager/core/browser/login_database_win.cc
 // line 20
 LoginDatabase::EncryptionResult LoginDatabase::DecryptedString(
@@ -58,7 +58,7 @@ LoginDatabase::EncryptionResult LoginDatabase::DecryptedString(
 We first begin in [```login_database_win.cc```](https://source.chromium.org/chromium/chromium/src/+/main:components/password_manager/core/browser/login_database_win.cc;drc=33b3aa70bf6301445205dd9d6e3c9de8243dba6e;l=20) which contains the function ```LoginDatabase::DecryptedString```. According to the header file, this function is an abstraction of the decryption process - it simply takes in a string (our encrypted password) and returns a u16string (our password in UTF16 widestring format). 
 
 
-```C++
+```c++
 // components/os_crypt/os_crypt_win.cc
 // line 148
 bool OSCryptImpl::DecryptString16(const std::string& ciphertext,
@@ -78,7 +78,7 @@ The noteworthy function called by ```LoginDatabase::DecryptedString``` is ```OSC
 Once again, this is another layer of abstraction from the true decryption process. It calls one more function, ```DecryptString```, which handles both the ciphertext and plaintext in UTF8.  
 
 
-```C++
+```c++
 // components/os_crypt/os_crypt_win.cc
 // line 183
 bool OSCryptImpl::DecryptString(const std::string& ciphertext,
@@ -227,7 +227,7 @@ bool DecryptStringWithDPAPI(const std::string& ciphertext,
 Finally, the ```DecryptStringWithDPAPI``` is a wrapper for the WinAPI function [CryptUnprotectData](https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptunprotectdata). It takes in the base64-decoded string from ```OSCryptImpl::InitWithExistingKey```, casts it to a ```BYTE*```, and stores the value along with its length in a [DATA_BLOB](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa381414(v=vs.85)) structure. 
 
 
- ## Simple Steps
+## Simple Steps
 
 
 The above analysis is a large amount of information to process, though it is quite extensive and documents the inner workings of Chromium. There are multiple layers of abstraction which can be confusing to parse through. If you are looking for the "shortcut" answer as to how it works, look no further. These steps are a high-level overview of how to obtain plaintext browser credentials from the browser's credential store.
